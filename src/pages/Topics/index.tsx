@@ -2,9 +2,34 @@ import { Header } from "../../components/Header";
 
 import stLogo from '../../assets/stLogo.png';
 
-import { Container } from './styles';
+import { useState } from 'react';
+
+import { Container} from './styles';
+
+import Modal from 'react-modal';
 
 export default function Topics () {
+
+    const customStyles = {
+        content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+        },
+      };
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    function openModal () {
+        setModalIsOpen(true);
+    }
+
+    function closeModal () {
+        setModalIsOpen(false);
+    }
 
     const topics = [
         {
@@ -26,11 +51,28 @@ export default function Topics () {
 
     return (
         <>
+                <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Create topic"
+                style={customStyles}
+            >
+                
+                <button onClick={closeModal}>Close</button>
+                <div>Create a topic</div>
+                <form>
+                <p>Name</p>
+                <input type="text"/>
+                <p>Description</p>
+                <input type="text"/>
+                <button>Create</button>
+                </form>
+            </Modal>
         <Header />
         <Container>
             <div className="main-div-element">
                 <p className="master-title-element">Topics</p>
-                <button type="button" > Create a topic </button>
+                <button type="button" onClick={openModal}> Create a topic </button>
             </div>
 
             {

@@ -42,4 +42,3 @@ export const Container = styled.header`
         }
     }
 `
-export const Body = styled.div``

@@ -1,4 +1,4 @@
-import { Container, Body } from './styles';
+import { Container } from './styles';
 
 import stLogo from '../../assets/stLogo.png';
 
