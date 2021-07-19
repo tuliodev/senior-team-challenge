@@ -6,7 +6,7 @@ export const Container = styled.div`
     gap: 2rem;
     margin-top: 1rem;
     flex-wrap: wrap;
-    
+
     img {
         width: 100%;
         max-width: 150px;
@@ -17,7 +17,8 @@ export const Container = styled.div`
         flex-direction: row;
         flex-wrap: wrap;
         gap: 1rem;
-        background: #F0F2F5
+        background: #F0F2F5;
+        
     }
     .div-sub-element {
         display: flex;
