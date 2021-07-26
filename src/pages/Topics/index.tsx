@@ -2,13 +2,28 @@ import { Header } from "../../components/Header";
 
 import stLogo from '../../assets/stLogo.png';
 
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 
 import { Container} from './styles';
 
 import { CreateTopicModal } from "../../components/CreateTopicModal";
 
+import { api } from '../../services/api';
+
+
+interface TopicDTO {
+    id: string;
+    name: string;
+    description: string;
+}
+
 export default function Topics () {
+    useEffect(() => {
+        api.get('/topics').then(res => setTopics(res.data))
+    }, [])
+
+    const [topics, setTopics] = useState<TopicDTO[]>([])
+
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -18,41 +33,10 @@ export default function Topics () {
 
     function closeModal () {
         setModalIsOpen(false);
+            api.get('/topics').then(res => setTopics(res.data))
+
     }
-
-    const topics = [
-        {
-            "id": 1,
-            "name": "Generic Topic",
-            "description": " a diam purus. Proin facilisis nisl ut elit efficitur, id pellentesque lectus dapibus. Integer ornare venenatis rutrum. Etiam finibus malesuada erat ut accumsan. Curabitur hendrerit, turpis a congue viverra, ipsum dolor euismod metus, quis rhoncus tellus urna et enim"
-        },
-        {
-            "id": 2,
-            "name": "Top Topic",
-            "description": "a diam purus. Proin facilisis nisl ut elit efficitur, id pellentesque lectus dapibus. Integer ornare venenatis rutrum. Etiam finibus malesuada erat ut accumsan. Curabitur hendrerit, turpis a congue viverra, ipsum dolor euismod metus, quis rhoncus tellus urna et enim"
-        },
-        {
-            "id": 3,
-            "name": "Senior team topic",
-            "description": "A senior team topic"
-        },
-        {
-            "id": 1,
-            "name": "Generic Topic",
-            "description": " a diam purus. Proin facilisis nisl ut elit efficitur, id pellentesque lectus dapibus. Integer ornare venenatis rutrum. Etiam finibus malesuada erat ut accumsan. Curabitur hendrerit, turpis a congue viverra, ipsum dolor euismod metus, quis rhoncus tellus urna et enim"
-        },
-        {
-            "id": 2,
-            "name": "Top Topic",
-            "description": "a diam purus. Proin facilisis nisl ut elit efficitur, id pellentesque lectus dapibus. Integer ornare venenatis rutrum. Etiam finibus malesuada erat ut accumsan. Curabitur hendrerit, turpis a congue viverra, ipsum dolor euismod metus, quis rhoncus tellus urna et enim"
-        },
-        {
-            "id": 3,
-            "name": "Senior team topic",
-            "description": "A senior team topic"
-        }
-    ]
-
+    
     return (
         <>
         <Header />
