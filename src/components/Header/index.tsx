@@ -11,8 +11,8 @@ export function Header () {
             </div>
             <div className="secondElement">
                 <a href="/topics"> TOPICS </a>
-                <a href="/"> STAFF </a>
-                <a href="/"> MINECRAFT </a>
+                <a href="/staff"> STAFF </a>
+                <a href="/minecraft"> MINECRAFT </a>
             </div>
         </Container>
 

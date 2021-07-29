@@ -34,6 +34,8 @@ export function CreateTopicModal({isOpen, onRequestClose}: CreateTopicModalProps
              name: name || " ",
              description: description || " "
           })
+
+          onRequestClose();
       }
 
     return (
@@ -45,7 +47,7 @@ export function CreateTopicModal({isOpen, onRequestClose}: CreateTopicModalProps
 
             <Container>
 
-
+                <div>
                 <h2>Create a topic</h2>
 
                 <input 
@@ -73,8 +75,10 @@ export function CreateTopicModal({isOpen, onRequestClose}: CreateTopicModalProps
                 className="react-modal-close"
                 >
                 <p>Close</p>
-            </button>
+                </button>
 
+
+                </div>
                 
             </Container>
 

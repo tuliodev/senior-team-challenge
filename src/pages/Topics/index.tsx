@@ -8,6 +8,8 @@ import { Container} from './styles';
 
 import { CreateTopicModal } from "../../components/CreateTopicModal";
 
+import { TopicDescriptionModal } from "../../components/TopicDescriptionModal";
+
 import { api } from '../../services/api';
 
 
@@ -24,17 +26,28 @@ export default function Topics () {
 
     const [topics, setTopics] = useState<TopicDTO[]>([])
 
+    const [data, setData] = useState<TopicDTO>({} as TopicDTO);
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [topicDescriptionModalIsOpen, setTopicDescriptionModalIsOpen] = useState(false);
 
-    function openModal () {
-        setModalIsOpen(true);
+    function openTopicDescriptionModal (value: TopicDTO) {
+        setData(value);
+        setTopicDescriptionModalIsOpen(true);
     }
 
-    function closeModal () {
-        setModalIsOpen(false);
-            api.get('/topics').then(res => setTopics(res.data))
+    function closeTopicDescriptionModal () {
+        setTopicDescriptionModalIsOpen(false);
+    }
 
+    const [topicModalIsOpen, setTopicModalIsOpen] = useState(false);
+
+    function openTopicModal () {
+        setTopicModalIsOpen(true);
+    }
+
+    function closeTopicModal () {
+        setTopicModalIsOpen(false);
+        api.get('/topics').then(res => setTopics(res.data))
     }
     
     return (
@@ -43,17 +56,23 @@ export default function Topics () {
         <Container>
         
         <CreateTopicModal
-         isOpen={modalIsOpen} 
-         onRequestClose={closeModal}
+         isOpen={topicModalIsOpen} 
+         onRequestClose={closeTopicModal}
+        />
+
+        <TopicDescriptionModal
+         isOpen={topicDescriptionModalIsOpen} 
+         onRequestClose={closeTopicDescriptionModal}
+         elementData={data}
         />
             <div className="main-div-element">
                 <p className="master-title-element">Topics</p>
-                <button type="button" onClick={openModal}> Create a topic </button>
+                <button type="button" onClick={openTopicModal}> Create a topic </button>
             </div>
 
             {
                 topics.map(element => 
-                    <div className="topics-div" key={element.id} >
+                    <div className="topics-div" key={element.id} onClick={() => openTopicDescriptionModal(element)}>
                         <img src={stLogo} alt="icone"/>
                         <div className="div-sub-element">
                             <p className="topic-title"> {element.name} </p> 

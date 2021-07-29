@@ -6,6 +6,7 @@ export const Container = styled.div`
     gap: 2rem;
     margin-top: 1rem;
     flex-wrap: wrap;
+    overflow: auto;
 
     img {
         width: 100%;
@@ -18,6 +19,7 @@ export const Container = styled.div`
         flex-wrap: wrap;
         gap: 1rem;
         background: #F0F2F5;
+        cursor: pointer;
         
     }
     .div-sub-element {
